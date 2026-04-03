@@ -49,7 +49,7 @@
     "typescript": "~5.9.2"
   },
   "overrides": {
-    "lightningcss": "1.29.1"
+  "lightningcss": "1.29.1"
   },
   "private": true
 }

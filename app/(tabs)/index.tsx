@@ -13,9 +13,9 @@ import "@/global.css";
 import { formatCurrency } from "@/lib/utils";
 import dayjs from "dayjs";
 import { styled } from "nativewind";
-import { FlatList, Image, Text, View } from "react-native";
-import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 import { useState } from "react";
+import { FlatList, Image, ScrollView, Text, View } from "react-native";
+import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 const SafeAreaView = styled(RNSafeAreaView);
 
 export default function App() {
@@ -49,20 +49,17 @@ export default function App() {
 
             <View className="mb-5">
               <ListHeading title="Upcoming" />
-              <FlatList
-                data={UPCOMING_SUBSCRIPTIONS}
-                renderItem={({ item }) => (
-                  <UpcomingSubscriptionCard {...item} />
-                )}
-                keyExtractor={(item) => item.id}
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                ListEmptyComponent={
-                  <Text className="home-empty-state">
-                    No upcoming subscriptions
-                  </Text>
-                }
-              />
+              {UPCOMING_SUBSCRIPTIONS.length > 0 ? (
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                  {UPCOMING_SUBSCRIPTIONS.map((item) => (
+                    <UpcomingSubscriptionCard key={item.id} {...item} />
+                  ))}
+                </ScrollView>
+              ) : (
+                <Text className="home-empty-state">
+                  No upcoming subscriptions
+                </Text>
+              )}
             </View>
 
             <ListHeading title="All Subscriptions" />
@@ -83,7 +80,7 @@ export default function App() {
         )}
         extraData={expandedSubscriptionId}
         ItemSeparatorComponent={() => <View className="h-4" />}
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           <Text className="home-empty-state">No subscriptions yet.</Text>
         }

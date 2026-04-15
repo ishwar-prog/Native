@@ -17,6 +17,7 @@ const SubscriptionCard = ({
   onPress,
   paymentMethod,
   startDate,
+  status,
 }: SubscriptionCardProps) => {
   return (
     <Pressable
